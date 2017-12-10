@@ -190,6 +190,7 @@ class TSBitMapper:
         featws = self._level_size
 
         for i in range(lagws, ts_len - leadws + 1):
+            print i
 
             if i == lagws:
                 lag_chunk = binned_ts[i - lagws: i]
@@ -279,7 +280,6 @@ class TSBitMapper:
         for idx, score in enumerate(scores):
             if score > thres:
                 labels[idx] = -1
-
         return labels
 
     def predict(self, ts):

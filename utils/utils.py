@@ -1,16 +1,16 @@
 import pandas as pd
 import numpy as np
 import pylab as pl
-from sklearn.metrics import roc_auc_score
+from sklearn.metrics import roc_auc_score,precision_score,recall_score
 
-#独热编码函数
+#one hot code
 def add_dummy(samples,col):
     oht = pd.get_dummies(samples[col])
     oht.columns = map(lambda x:col+str(x),np.unique(samples[col].dropna().values))
     samples = samples.join(oht)
     return [samples,oht.columns]
 
-#交叉特征函数
+#cross feature
 def cross_feas(samples,cols1,cols2):
     feas=[]
     for col1 in cols1:
@@ -19,7 +19,7 @@ def cross_feas(samples,cols1,cols2):
             samples[col1+"*"+col2] = [a*b for a,b in zip(samples[col1].values,samples[col2].values)]
     return feas
 
-#获得时间序列的周期
+#get the period of time series
 def getPeriod(timeseries,index,value,fft_size):
     length = len(timeseries)
     x = timeseries.loc[:,value]
@@ -30,10 +30,10 @@ def getPeriod(timeseries,index,value,fft_size):
     pl.figure(figsize=(8, 4))
     pl.subplot(211)
     pl.plot(timeseries[index][:fft_size], xs)
-    pl.title("时间序列的波形和频谱")
+    pl.title("wave and frequency of timeseries")
     pl.subplot(212)
     pl.plot(freqs, xfp)
-    pl.xlabel(u"频率(Hz)")
+    pl.xlabel(u"frequency(Hz)")
     pl.subplots_adjust(hspace=0.4)
     pl.show()
     return xfp
@@ -41,5 +41,35 @@ def getPeriod(timeseries,index,value,fft_size):
 def auc_score(true_y,pred_y):
     return roc_auc_score(true_y,pred_y)
 
+def precision_score(true_y,pred_y):
+    return precision_score(true_y=true_y,pred_y=pred_y)
+
+def recall_score(true_y,pred_y):
+    return recall_score(true_y=true_y,pred_y=pred_y)
 
 
+def append_data(dic,key,value):
+    """
+    Insert a value to a dict
+    :param dic: the target dict
+    :param key:
+    :param value:
+    :return:
+    """
+    if(dic.has_key(key)):
+        dic[key].append(value)
+    else:
+        dic[key] = [value]
+    return dic
+
+def getStrs(pre,num):
+    """
+    get a standard strings
+    :param pre:
+    :param num: how much strings to return
+    :return:
+    """
+    result = []
+    for i in range(num):
+        result.append(pre+str(i))
+    return result

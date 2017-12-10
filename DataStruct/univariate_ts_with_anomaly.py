@@ -3,17 +3,16 @@ import matplotlib.pyplot as plt
 from utils.utils import getPeriod
 
 class univariate_ts_with_anomaly():
-    # attribute
-    period = -1#周期
 
     def __init__(self, name, timeseries,index,value,anomaly,types):
-        #todo 参数检查
+        #todo parameter checkout
         self.name = name
         self.timeseries = timeseries
         self.index = index
         self.value = value
         self.anomaly = anomaly
         self.types = types
+        self.period = -1
 
     def get_dataframe(self,type):
         return self.timeseries
@@ -27,7 +26,6 @@ class univariate_ts_with_anomaly():
     def get_types_number(self):
         return len(pd.unique(self.timeseries[self.types]))
 
-    #实现打印出时间序列和异常点
     def plot(self,type):
         timeseries = self.timeseries[self.timeseries[self.types]==type]
         self.plot_timeseries(timeseries)
@@ -42,7 +40,6 @@ class univariate_ts_with_anomaly():
     def ts_window(self, start, end,type):
         return "todo"
 
-    #返回异常点的数目
     def anomaly_num(self,type=None):
         if(type==None):
             return len(self.timeseries[self.timeseries[self.anomaly] == 1])
@@ -50,7 +47,6 @@ class univariate_ts_with_anomaly():
             timeseries = self.timeseries[self.timeseries[self.types] == type]
             return len(timeseries[timeseries[self.anomaly] == 1])
 
-    #返回整个时间序列的长度
     def length(self,type=None):
         if (type == None):
             return len(self.timeseries)
@@ -58,7 +54,6 @@ class univariate_ts_with_anomaly():
             timeseries = self.timeseries[self.timeseries[self.types] == type]
             return len(timeseries)
 
-    #返回时间序列的周期
     def getPeriod(self,type=None,fft_size=None):
         ts = None
         if (type == None):

@@ -9,7 +9,15 @@ def AnomalyDetectionWithMedian(timeseries,period,direction,rate):
     }
     return result.get(direction)(timeseries,period)
 
+
 def AnomalyDetectionWithMedianBefore(timeseries,period,rate):
+    """
+
+    :param timeseries:
+    :param period:
+    :param float rate:
+    :return: series with label
+    """
     result=np.array()
     for i in range(len(timeseries)):
         if i == 0 :
