@@ -73,3 +73,14 @@ def getStrs(pre,num):
     for i in range(num):
         result.append(pre+str(i))
     return result
+
+def  SeriesStandard(series):
+    """
+    return a new series which the mean is 0 and variance is 1
+    :param series:
+    :return:
+    """
+    mean = np.mean(series)
+    variance = np.var(series)
+    series = (series-mean)/variance
+    return series
