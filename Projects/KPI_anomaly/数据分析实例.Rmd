@@ -1,0 +1,41 @@
+---
+title: "R Notebook"
+output: html_notebook
+author: sheldon
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
+
+```{r}
+#load libraries
+```
+
+
+```{r}
+#load data
+submit<-read.csv("../../dataset/anomaly_detection_1/test_dataset.csv")
+```
+
+```{r}
+summary(submit)
+```
+
+```{r}
+submit$predict<-1
+head(submit)
+```
+
+```{r}
+write.csv(submit[,c(1,2,4)],"./results/all1.csv",quote = F,row.names = F)
+```
+

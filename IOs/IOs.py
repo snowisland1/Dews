@@ -36,7 +36,7 @@ def do_nothing(timeseries,index_col):
 
 if __name__ == '__main__':
     filepath = "../dataset/anomaly_detection_1/train.csv"
-    data = read_time_series_with_ananomly(file_path=filepath, timeparse="datetime", index_col="timestamp",
+    data = read_time_series_with_ananomly(file_path=filepath, timeparse="none", index_col="timestamp",
                                           header_num=0, ananomly_col="label",types_col="KPI ID",value_col="value")
     types = data.get_types()
     print(data.getPeriod(type="e0770391decc44ce",fft_size=1000))
