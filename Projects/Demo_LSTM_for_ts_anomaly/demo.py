@@ -28,7 +28,7 @@ def dropin(X, y):
     for i in range(0, len(X)):
         for j in range(0, np.random.random_integers(0, random_data_dup)):
             X_hat.append(X[i, :])
-            y_hat.append(y[i])
+            y_hat.append(y[i, :])
     return np.asarray(X_hat), np.asarray(y_hat)
 
 def gen_wave():
@@ -45,7 +45,7 @@ def gen_wave():
     t_rider = arange(0.0, 0.5, 0.01)
     wave3 = sin(10 * pi * t_rider)
     print("wave3", len(wave3))
-    insert = round(0.8 * len(t))
+    insert = int(round(0.8 * len(t)))
     wave1[insert:insert + 50] = wave1[insert:insert + 50] + wave3
     return wave1 + wave2
 
